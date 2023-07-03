@@ -33,12 +33,17 @@ jobs:
         run: |
           curl https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip -o veracode.zip
           unzip -o veracode.zip
-  
+      
+      - name: Run Veracode Static Pipeline Scanner
+        continue-on-error: true
+        run: >  
+         echo ${{secrets.VERACODE_API_ID}}
+         
 # In this configuration, the Pipeline scanner will check against the baseline file and see if there are any new flaws compared to the baseline.  If there is, it will break the build.  If not, the build will continue.  
       - name: Run Veracode Static Pipeline Scanner
         continue-on-error: true
         run: >
-         java -jar pipeline-scan.jar --veracode_api_id ${{secrets.VERACODE_API_ID}} --veracode_api_key ${{secrets.VERACODE_API_KEY}}
+         java -jar pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY}}"
          --file app/target/verademo.war
          --summary_output true
          --baseline_file vc-pipeline-scanner-baseline.json
