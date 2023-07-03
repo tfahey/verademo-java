@@ -38,7 +38,7 @@ jobs:
       - name: Run Veracode Static Pipeline Scanner
         continue-on-error: true
         run: >
-         java -jar pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY}}"
+         java -jar pipeline-scan.jar --veracode_api_id ${{secrets.VERACODE_API_ID}} --veracode_api_key ${{secrets.VERACODE_API_KEY}}
          --file app/target/verademo.war
          --summary_output true
          --baseline_file vc-pipeline-scanner-baseline.json
