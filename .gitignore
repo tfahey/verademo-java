@@ -1,1 +1,4 @@
 app/target/
+
+# ignore things like results.json from a pipeline scan
+app/*.json      
