@@ -1,12 +1,13 @@
 # VeraDemo - Blab-a-Gag
 
-### :information_source: Notice
+### Notice
 
 This project is intentionally vulnerable! It contains known vulnerabilities and security errors in its code and is meant as an example project for software security scanning tools such as Veracode. Please do not report vulnerabilities in this project; the odds are they’re there on purpose :) .
 
 ## About
 
 Blab-a-Gag is a fairly simple forum type application which allows:
+
 * Users can post a one-liner joke.
 * Users can follow the jokes of other users or not (listen or ignore).
 * Users can comment on other users messages (heckle).
@@ -29,11 +30,13 @@ If you don't already have Docker this is a prerequisite.
 [DEPRECATED]: docker run --rm -it -p 127.0.0.1:8080:8080 antfie/verademo  (new link pending)
 ```
 
-Navigate to: http://127.0.0.1:8080.
+Navigate to: `http://127.0.0.1:8080`.
 
 ## Exploitation Demos
 
-See the `docs` folder.
+See the [DEMO_NOTES](DEMO_NOTES.md) file for information on using this application with the various Veracode scan types.
+
+Also see the `docs` folder for in-depth explanations of the various exploits exposed in this application.
 
 ## Technologies Used
 
@@ -43,14 +46,13 @@ See the `docs` folder.
 ## Development
 
 To build the container run this:
-```
-docker pull mariadb:10.6.2
-docker build --no-cache -t verademo .
-```
+
+	docker pull mariadb:10.6.2
+	docker build --no-cache -t verademo .
+
 
 To run the container for local development run this:
 
-```
-docker run --rm -p 8080:8080 --name verademo verademo
-```
-register, add to feed
+	docker run --rm -p 8080:8080 --name verademo verademo
+
+Then register as a new user and add some feeds
