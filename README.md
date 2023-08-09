@@ -38,6 +38,19 @@ See the [DEMO_NOTES](DEMO_NOTES.md) file for information on using this applicati
 
 Also see the `docs` folder for in-depth explanations of the various exploits exposed in this application.
 
+## CI System Demos
+
+There are build files for various CI systems included as part of this application.  Often there are several sample build files for each CI system, but there will always be at least an 'essentials' file that shows the basic steps to get the application packaged and scanned with Veracode's technology.
+
+Note that there are some secrets that need to get set in the build files.  These might vary a bit between CI systems, but generally:
+
+* `VERACODE_API_ID` & `VERACODE_API_KEY`: The API credentials of the Veracode user account used to run the scan.  See [here](https://docs.veracode.com/r/c_api_credentials3).
+* `SRCCLR_API_TOKEN`: The token needed for the agent-based SCA scanner.  See [here](https://docs.veracode.com/r/Integrate_Veracode_SCA_Agent_Based_Scanning_with_Your_CI_Projects).
+
+| CI System | "Essential" File |
+|-----------|----------------|
+| GitHub   | `.github/workflows/the-essentials.yml` |
+
 ## Technologies Used
 
 * Spring boot
