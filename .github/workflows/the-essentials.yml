@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
     
       - name: setup java
         uses: actions/setup-java@v1
@@ -47,13 +47,12 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: scan-target
-          path: /tmp
 
       # debugging steps can be handy...
       - name: debug1
         run: |
           pwd
-          ls -l /tmp
+          ls -l
 
       - name: scan
         run: |
@@ -61,7 +60,7 @@ jobs:
             -vid ${{ secrets.VERACODE_API_ID }} -vkey ${{ secrets.VERACODE_API_KEY }} \
             -action UploadAndScan \
             -appname "Verademo" -createprofile false \
-            -filepath /tmp/verademo.war -version "GitHub $GITHUB_RUN_NUMBER"                
+            -filepath verademo.war -version "GitHub $GITHUB_RUN_NUMBER"                
         continue-on-error: true
 
 # the above steps are the bare minimum.
@@ -72,7 +71,7 @@ jobs:
 
     steps:
       - name: checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: setup java
         uses: actions/setup-java@v1
@@ -84,6 +83,7 @@ jobs:
           SRCCLR_API_TOKEN: ${{ secrets.SRCCLR_API_TOKEN }}
         uses: veracode/veracode-sca@v2.1.9
         with:
+          path: app
           create-issues: false
 
   container-scan:
@@ -92,7 +92,7 @@ jobs:
 
     steps:
       - name: checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: setup java
         uses: actions/setup-java@v1
