@@ -89,6 +89,12 @@ jobs:
           path: app
           create-issues: false
 
+      - name: display SCA results
+        run: |
+          pwd
+          ls -l
+          cat scaResults.txt
+
   container-scan:
     needs: checkout-and-package     # OK not really, but keeps things cleaner
     runs-on: ubuntu-latest
@@ -112,3 +118,9 @@ jobs:
           type: "directory"
           source: "."
           format: "table"
+
+      - name: display Container scan results
+        run: |
+            pwd
+            ls -l
+            cat results.txt
