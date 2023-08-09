@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
     
 jobs:
-  checkout-package:
+  checkout-and-package:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,29 +22,31 @@ jobs:
         uses: actions/checkout@v3
     
       - name: setup java
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
-          java-version: 1.8
+          distribution: 'zulu'
+          java-version: '8'
     
       - name: Build with Maven
         working-directory: ./app/
         run: mvn clean package
 
       - name: save artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: scan-target
           path: app/target/verademo.war
 
   upload-scan:
-    needs: checkout-package
+    needs: checkout-and-package
     runs-on: ubuntu-latest
     container:
       image: veracode/api-wrapper-java:latest
+      options: --user root
 
     steps:
       - name: get artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: scan-target
 
@@ -66,7 +68,7 @@ jobs:
 # the above steps are the bare minimum.
 # below are some additional steps that are commonplace
   sca-scan:
-    needs: checkout-package     # OK not really, but keeps things cleaner
+    needs: checkout-and-package     # OK not really, but keeps things cleaner
     runs-on: ubuntu-latest
 
     steps:
@@ -74,9 +76,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: setup java
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
-          java-version: 1.8
+          distribution: 'zulu'
+          java-version: '8'
 
       - name: do SCA scan
         env:
@@ -87,7 +90,7 @@ jobs:
           create-issues: false
 
   container-scan:
-    needs: checkout-package     # OK not really, but keeps things cleaner
+    needs: checkout-and-package     # OK not really, but keeps things cleaner
     runs-on: ubuntu-latest
 
     steps:
@@ -95,9 +98,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: setup java
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
-          java-version: 1.8
+          distribution: 'zulu'
+          java-version: '8'
 
       - name: do Container scan
         uses: veracode/container_iac_secrets_scanning@v1.0.0
