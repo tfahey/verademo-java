@@ -47,9 +47,11 @@ Note that there are some secrets that need to get set in the build files.  These
 * `VERACODE_API_ID` & `VERACODE_API_KEY`: The API credentials of the Veracode user account used to run the scan.  See [here](https://docs.veracode.com/r/c_api_credentials3).
 * `SRCCLR_API_TOKEN`: The token needed for the agent-based SCA scanner.  See [here](https://docs.veracode.com/r/Integrate_Veracode_SCA_Agent_Based_Scanning_with_Your_CI_Projects).
 
-| CI System | "Essential" File |
+| CI System | "Essentials" File |
 |-----------|----------------|
 | GitHub   | `.github/workflows/the-essentials.yml` |
+| Azure Dev Ops| X |
+| Jenkins | J |
 
 ## Technologies Used
 

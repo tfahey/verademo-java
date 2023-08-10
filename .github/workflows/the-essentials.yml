@@ -91,8 +91,6 @@ jobs:
 
       - name: display SCA results
         run: |
-          pwd
-          ls -l
           cat scaResults.txt
 
   container-scan:
@@ -109,7 +107,7 @@ jobs:
           distribution: 'zulu'
           java-version: '8'
 
-      - name: do Container scan
+      - name: do container scan
         uses: veracode/container_iac_secrets_scanning@v1.0.0
         with:
           vid: ${{ secrets.VERACODE_API_ID }}
@@ -118,9 +116,3 @@ jobs:
           type: "directory"
           source: "."
           format: "table"
-
-      - name: display Container scan results
-        run: |
-            pwd
-            ls -l
-            cat results.txt
