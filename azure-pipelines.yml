@@ -1,0 +1,48 @@
+#
+# This is an example of using VeraDemo Java test application with the Veracode Static Pipeline scanner.  
+
+# A Veracode subscription is required.
+trigger:
+- none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+resources:
+  containers:
+  - container: veracode-api
+    image: veracode/api-wrapper-java:latest
+
+stages:
+  - stage: Build
+    jobs:
+    - job: doBuild
+      steps:
+      - task: Maven@3
+        displayName: Build with Maven
+        inputs:
+          mavenPomFile: 'app/pom.xml'
+          mavenOptions: '-Xmx3072m'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.8'
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+          goals: 'package'
+
+  - stage: PolicyScan
+    jobs:
+    - job: doStaticScan
+      steps:
+      - script: |
+          echo buildNumber: $(build.buildNumber)
+          echo binDir: $(build.binariesDirectory)
+          echo artDir: $(build.artifactstagingdirectory)
+          echo srcDir: $(build.sourcesDirectory)
+        target: host
+      - script: |
+            java -jar /opt/veracode/api-wrapper.jar -vid $(VERACODE_API_ID) -vkey $(VERACODE_API_KEY) \
+              -action UploadAndScan -createprofile false \
+              -appname "verademo" -version 'Azure-$(build.buildNumber)' \
+              -filepath $(build.artifactstagingdirectory)/app/target/verademo.war
+        target: veracode-api
+
