@@ -54,7 +54,7 @@ stages:
     - job: doSCAScan
       steps:
       - script: |
-          curl -sSL https://download.sourceclear.com/ci.sh | sh
+          curl -sSL https://download.sourceclear.com/ci.sh | sh -s -- scan app
         env: 
           SRCCLR_API_TOKEN: $(SRCCLR_TOKEN)
 
