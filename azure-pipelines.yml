@@ -49,3 +49,21 @@ stages:
           version: 'Azure-$(build.buildNumber)'
           filepath: '$(build.artifactstagingdirectory)/upload/verademo.war'
 
+  - stage: PolicyScan
+    jobs:
+    - job: doSCAScan
+      steps:
+      - script: |
+          curl -sSL https://download.sourceclear.com/ci.sh | sh
+        env: 
+          SRCCLR_API_TOKEN: $(SRCCLR_TOKEN)
+
+  - stage: ContainerScan
+    jobs:
+    - job: doContainerScan
+      steps:
+      - script: |
+          curl -fsS https://tools.veracode.com/veracode-cli/install | sh
+          ./veracode scan --type directory --source . --format table
+
+
