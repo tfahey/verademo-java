@@ -32,7 +32,6 @@ stages:
   - stage: PolicyScan
     jobs:
     - job: doStaticScan
-      container: veracode/api-wrapper-java:latest
       steps:
       - script: |
           echo buildNumber: $(build.buildNumber)
