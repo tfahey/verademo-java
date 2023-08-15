@@ -8,11 +8,6 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-resources:
-  containers:
-  - container: veracode-api
-    image: veracode/api-wrapper-java:latest
-
 stages:
   - stage: Build
     jobs:
@@ -39,10 +34,12 @@ stages:
           echo artDir: $(build.artifactstagingdirectory)
           echo srcDir: $(build.sourcesDirectory)
         target: host
-      - script: |
-            java -jar /opt/veracode/api-wrapper.jar -vid $(VERACODE_API_ID) -vkey $(VERACODE_API_KEY) \
-              -action UploadAndScan -createprofile false \
-              -appname "verademo" -version 'Azure-$(build.buildNumber)' \
-              -filepath $(build.artifactstagingdirectory)/app/target/verademo.war
-        target: veracode-api
+      - task: Veracode@3
+        inputs:
+          ConnectionDetailsSelection: 'Credentials'
+          apiId: $(VERACODE_API_ID)
+          apiKey: $(VERACODE_API_KEY)
+          veracodeAppProfile: 'Verademo'
+          version: 'Azure-$(build.buildNumber)'
+          filepath: '$(build.artifactstagingdirectory)/target/verademo.war'
 
