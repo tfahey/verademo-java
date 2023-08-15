@@ -23,6 +23,10 @@ stages:
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
           goals: 'package'
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: 'app/target/verademo.war'
+          ArtifactName: 'upload'
 
   - stage: PolicyScan
     jobs:
@@ -33,7 +37,9 @@ stages:
           echo binDir: $(build.binariesDirectory)
           echo artDir: $(build.artifactstagingdirectory)
           echo srcDir: $(build.sourcesDirectory)
-        target: host
+      - task: DownloadBuildArtifacts@1
+        inputs:
+          artifactName: upload
       - task: Veracode@3
         inputs:
           ConnectionDetailsSelection: 'Credentials'
@@ -41,5 +47,5 @@ stages:
           apiKey: $(VERACODE_API_KEY)
           veracodeAppProfile: 'Verademo'
           version: 'Azure-$(build.buildNumber)'
-          filepath: '$(build.artifactstagingdirectory)/target/verademo.war'
+          filepath: 'app/target/verademo.war'
 
