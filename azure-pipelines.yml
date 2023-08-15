@@ -47,5 +47,5 @@ stages:
           apiKey: $(VERACODE_API_KEY)
           veracodeAppProfile: 'Verademo'
           version: 'Azure-$(build.buildNumber)'
-          filepath: 'app/target/verademo.war'
+          filepath: 'upload/verademo.war'
 
