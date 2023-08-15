@@ -1,5 +1,6 @@
 #
 # This is an example of using VeraDemo Java test application with the Veracode Static Pipeline scanner.  
+#
 
 # A Veracode subscription is required.
 trigger:
@@ -32,11 +33,12 @@ stages:
     jobs:
     - job: doStaticScan
       steps:
-      - script: |
-          echo buildNumber: $(build.buildNumber)
-          echo binDir: $(build.binariesDirectory)
-          echo artDir: $(build.artifactstagingdirectory)
-          echo srcDir: $(build.sourcesDirectory)
+      #debugging step
+      # - script: |
+      #     echo buildNumber: $(build.buildNumber)
+      #     echo binDir: $(build.binariesDirectory)
+      #     echo artDir: $(build.artifactstagingdirectory)
+      #     echo srcDir: $(build.sourcesDirectory)
       - task: DownloadBuildArtifacts@1
         inputs:
           artifactName: upload
@@ -49,6 +51,8 @@ stages:
           version: 'Azure-$(build.buildNumber)'
           filepath: '$(build.artifactstagingdirectory)/upload/verademo.war'
 
+# the above steps are the bare minimum.
+# below are some additional steps that are commonplace
   - stage: SCAScan
     jobs:
     - job: doSCAScan
