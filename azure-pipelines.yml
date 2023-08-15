@@ -66,7 +66,7 @@ stages:
           curl -fsS https://tools.veracode.com/veracode-cli/install | sh
           ./veracode scan --type directory --source . --format table
         env:
-          VERACODE_API_ID: $(VERACODE_API_ID)
-          VERACODE_API_KEY: $(VERACODE_API_KEY)
+          VERACODE_API_KEY_ID: $(VERACODE_API_ID)
+          VERACODE_API_KEY_SECRET: $(VERACODE_API_KEY)
 
 
