@@ -49,7 +49,7 @@ stages:
           version: 'Azure-$(build.buildNumber)'
           filepath: '$(build.artifactstagingdirectory)/upload/verademo.war'
 
-  - stage: PolicyScan
+  - stage: SCAScan
     jobs:
     - job: doSCAScan
       steps:
