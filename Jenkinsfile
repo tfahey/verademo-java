@@ -37,10 +37,10 @@ pipeline {
                 withMaven(maven:'maven-3') {
                     script {
                         if(isUnix() == true) {
-                            sh 'mvn clean package'
+                            sh 'mvn -f app clean package'
                         }
                         else {
-                            bat 'mvn clean package'
+                            bat 'mvn -f app clean package'
                         }
                     }
                 }
