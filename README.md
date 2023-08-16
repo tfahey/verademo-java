@@ -50,7 +50,7 @@ Note that there are some secrets that need to get set in the build files.  These
 | CI System | "Essentials" File |
 |-----------|----------------|
 | GitHub   | `.github/workflows/the-essentials.yml` |
-| Azure Dev Ops| X |
+| Azure Dev Ops| `azure-pipelines.yml` |
 | Jenkins | J |
 
 ## Technologies Used
