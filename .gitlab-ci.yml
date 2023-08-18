@@ -37,5 +37,5 @@ veracode_container_scan:
     stage: container-scan
     script:
         - curl -fsS https://tools.veracode.com/veracode-cli/install | sh
-            ./veracode scan --type directory --source . --format table
+        - ./veracode scan --type directory --source . --format table
                     
