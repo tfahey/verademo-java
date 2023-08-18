@@ -51,7 +51,8 @@ Note that there are some secrets that need to get set in the build files.  These
 |-----------|----------------|
 | GitHub   | `.github/workflows/the-essentials.yml` |
 | Azure Dev Ops| `azure-pipelines.yml` |
-| Jenkins | J |
+| Jenkins | `Jenkinsfile` |
+| GitLab | `.gitlab-ci.yml`
 
 ## Technologies Used
 
