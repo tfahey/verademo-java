@@ -11,7 +11,7 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on $(date)
-      - mvn -f app clean install               # technically, not necessary for Veracode upload/scan
+      - mvn -f app clean install
   post_build:
     commands:
       - echo Entered the post_build phase...
