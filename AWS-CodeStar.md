@@ -38,7 +38,6 @@ This is an overview of the Pipeline we'll be creating:
 
 ![CodePipeline overview](./aws/CodePipeline.jpg) 
 
-
 ### Create the Pipeline to Build the application
 
 Create a CodePipeline with the following settings (take the defaults unless otherwise specified):
@@ -76,6 +75,7 @@ Edit this Security stage and add an Action called "StaticScan"
 		* External registry URL: veracode/api-wrapper-java
 		* Registry credentials: the name or ARN of your DockerHub credentials from the AWS Secrets Manager
 		* Service role as required to build (likely the default is OK)
+			* Note: you might need to add permission for the Service Role to read the Secrets Manager.  There is a pre-defined "SecretsManagerReadWrite" role which can be used, although this is too permissive for real-world use.  Alternately, a read-only permission can be created and used.
 		* Environment variables, add the following:
 			* `VERACODE_API_ID` = name of the appropriate Parameter Store secret created above
 			* `VERACODE_API_KEY` = name of the appropriate Paramter Store secret created above
@@ -88,13 +88,6 @@ Here is a summary of the CodeBuild configuration:
 ![CodeBuild application overview](./aws/CodeBuild-static.jpg)
 
 Run and test the CodePipeline.  The verademo.war file should be uploaded to Veracode and a static scan initiated.	
-
-
-
-
-  and Secrets Manager Full access - too much...
-  
-
 
 ### Add the Veracode SCA scan Action
 
@@ -116,13 +109,6 @@ Here is a summary of the CodeBuild configuration:
 ![CodeBuild SCA overview](./aws/CodeBuild-sca.jpg)
 
 Run and test the CodePipeline.  
-
-
-
-
-
-IAM role - might need access to S3?
-
 
 ### Add the Veracode container scan Action
 

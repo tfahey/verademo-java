@@ -52,7 +52,8 @@ Note that there are some secrets that need to get set in the build files.  These
 | GitHub   | `.github/workflows/the-essentials.yml` |
 | Azure Dev Ops| `azure-pipelines.yml` |
 | Jenkins | `Jenkinsfile` |
-| GitLab | `.gitlab-ci.yml`
+| GitLab | `.gitlab-ci.yml` |
+| AWS | `AWS-CodeStar.md` (directions for configuring AWS CodeStar builds) |
 
 ## Technologies Used
 
