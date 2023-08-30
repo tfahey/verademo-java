@@ -9,12 +9,6 @@ pipeline {
         VERACODE_APP_NAME = 'Verademo'      // App Name in the Veracode Platform
     }
 
-    // this is optional on Linux, if jenkins does not have access to your locally installed docker
-    //tools {
-        // these match up with 'Manage Jenkins -> Global Tool Config'
-        //'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker-latest' 
-    //}
-
     stages{
         stage ('environment verify') {
             steps {
