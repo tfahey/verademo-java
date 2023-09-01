@@ -2,7 +2,7 @@
 
 Notes, tips, and hints for using the various Veracode scan types with this application.
 
-Also see the `docs` folder for in-depth explanations of the various exploits exposed in this application.
+Also see the `docs/flaws` folder for in-depth explanations of the various exploits exposed in this application.
 
 ## Static scanning
 
@@ -11,7 +11,7 @@ Build the app:
 	cd app
 	mvn clean package
 
-The `app/target/verademo.war` file is the built app.  This is the file to be used for scanning.  Either upload this file to the Veracode platform fora Policy/Sandbox scan, or use it with the Veracode Pipeline scan.
+The `app/target/verademo.war` file is the built app.  This is the file to be used for scanning.  Either upload this file to the Veracode platform for a Policy/Sandbox scan, or use it with the Veracode Pipeline scan.
 
 ## SCA scanning
 
@@ -50,7 +50,7 @@ This application has flaws that can be fixed with [Veracode Fix](https://docs.ve
 
 	veracode fix src/main/java/com/veracode/verademo/controller/UserController.java
 
-The first flaw is an SQL Injection, around line 170, that can be Fixed.
+The first flaw is an SQL Injection around line 170 that can be Fixed.
 
 To verify the fix re-build the app and re-run the Pipeline scanner. 
 
