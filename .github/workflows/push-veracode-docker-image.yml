@@ -29,6 +29,7 @@ jobs:
           image: docker:stable-dind
           run: |
             echo checking for version: ${{ env.VERSION }}
+            export DOCKER_CLI_EXPERIMENTAL=enabled
             docker version
             docker manifest inspect kevinrise/vulnerable-verademo-java:${{ env.VERSION }}
             exit_code=$?
