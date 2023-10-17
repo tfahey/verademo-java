@@ -16,13 +16,16 @@ jobs:
       - name: setup environment
         run: |
           VER=$(cat ./VERSION)
+          echo version: $VER
           echo "VERSION=$VER" >> $GITHUB_ENV
+          echo GitHub env: ${{ env.VERSION }}
 
       - name: check-latest-version
         uses: addnab/docker-run-action@v3
         with:
           image: rancher/dind
           run: |
+            echo version: ${{ env.VERSION }}
             docker manifest inspect kevinrise/vulnerable-verademo-java:${{ env.VERSION }} > /dev/null 2>&1
             exit_code=$?
             echo exit code: $exit_code
