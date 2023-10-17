@@ -1,6 +1,6 @@
 # build the docker image and push it to the official veracode repo
 
-name: push-docker-image
+name: push-veracode-docker-image
 
 on:
   workflow_dispatch:
