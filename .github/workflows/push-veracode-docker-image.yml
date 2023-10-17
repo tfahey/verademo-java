@@ -25,13 +25,8 @@ jobs:
           run: |
             docker manifest inspect kevinrise/vulnerable-verademo-java:${{ env.VERSION }} > /dev/null 2>&1
             exit_code=$?
-            if [ $exit_code = 0 ]; then
-              echo Image already exists, did you forget to bump the VERSION file?
-              exit 1
-            else 
-              echo free to push new image
-              exit 0
-            fi
+            echo exit code: $exit_code
+            if [ $exit_code -eq 0 ]; then echo Image already exists, did you forget to bump the VERSION file?; exit 1; else echo free to push new image; exit 0; fi
 
       - name: login to DockerHub
         uses: docker/login-action@v3
