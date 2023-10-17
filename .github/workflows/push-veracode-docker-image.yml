@@ -26,9 +26,9 @@ jobs:
       - name: check-latest-version
         uses: addnab/docker-run-action@v3
         with:
-          image: rancher/dind
+          image: docker:stable-dind
           run: |
-            echo version: ${{ env.VERSION }}
+            echo checking for version: ${{ env.VERSION }}
             docker manifest inspect kevinrise/vulnerable-verademo-java:${{ env.VERSION }}
             exit_code=$?
             echo exit code: $exit_code
