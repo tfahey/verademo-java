@@ -19,9 +19,9 @@ jobs:
           echo version: $VER
           echo "VERSION=$VER" >> $GITHUB_ENV
 
-      - name: verify env
-        run: |
-          echo GitHub env: ${{ env.VERSION }}
+      # - name: verify env
+      #   run: |
+      #     echo GitHub env: ${{ env.VERSION }}
 
       - name: check-latest-version
         uses: addnab/docker-run-action@v3
@@ -30,22 +30,20 @@ jobs:
           run: |
             echo checking for version: ${{ env.VERSION }}
             export DOCKER_CLI_EXPERIMENTAL=enabled
-            docker version
-            docker manifest inspect kevinrise/vulnerable-verademo-java:${{ env.VERSION }}
+            docker manifest inspect kevinrise/vulnerable-verademo-java:${{ env.VERSION }} > /dev/null 2>&1
             exit_code=$?
-            echo exit code: $exit_code
             if [ $exit_code -eq 0 ]; then echo Image already exists, did you forget to bump the VERSION file?; exit 1; else echo free to push new image; exit 0; fi
 
-      # - name: login to DockerHub
-      #   uses: docker/login-action@v3
-      #   with:
-      #     username: ${{ secrets.DOCKERHUB_VERA_USERNAME }}
-      #     password: ${{ secrets.DOCKERHUB_VERA_PASSWORD }}
+      - name: login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_VERA_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_VERA_PASSWORD }}
 
-      # - name: Build-Push Docker image
-      #   uses: docker/build-push-action@v5
-      #   with:
-      #     push: true
-      #     tags: |
-      #       kevinrise/vulnerable-verademo-java:${{ env.VERSION }}
-      #       kevinrise/vulnerable-verademo-java:latest
+      - name: Build-Push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: |
+            kevinrise/vulnerable-verademo-java:${{ env.VERSION }}
+            kevinrise/vulnerable-verademo-java:latest
