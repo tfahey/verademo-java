@@ -31,7 +31,7 @@ Navigate to: `http://127.0.0.1:8080`, register as a new user, login, add some fe
 
 ## Other Notes
 
-The source for this image is hosted [here](https://github.com/veracode-demo-labs/verademo-java), and within that repo are additional files that will cover both how to exploit this application and hoe to build this application for various CI systems.
+The source for this image is hosted [here](https://github.com/veracode-demo-labs/verademo-java), and within that repo are additional files that will cover both how to exploit this application and how to build this application for various CI systems.
 
 ### Exploitation Demos
 
