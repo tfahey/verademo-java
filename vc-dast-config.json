@@ -1,12 +1,6 @@
 {
   "name": "VeraDemo-Java-GitHub",
   "scan_setting": {
-    "custom_hosts": [
-      {
-        "host_name": "verademo-java-github.qa",
-        "ip_address": "98.212.110.137"
-      }
-    ],
     "max_browsers": 10
   },
   "scanner_variables": [
@@ -20,7 +14,7 @@
     {
       "scan_config_request": {
         "target_url": {
-          "url": "http://verademo-java-github.qa:8080"
+          "url": "https://verademo-java.veracode.cloud"
         }
       }
     }

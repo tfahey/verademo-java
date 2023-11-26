@@ -43,40 +43,6 @@ jobs:
           vkey: '${{ secrets.VERACODE_API_KEY }}'
         continue-on-error: true
 
-# Synch Issues into GitHub Issues.  This will synch the issues from the most recent completed SAST/SCA Policy scan.
-# This is fine for most, see more advanced workflow to get more instant feedback if needed.
-  Synch-Issues-to-GitHub:
-    runs-on: ubuntu-latest
-    container: 
-      image: veracode/api-signing:latest
-    steps:
-      - name: Get SAST/SCA/DAST Policy flaws
-        run: |
-          cd /tmp
-          export VERACODE_API_KEY_ID=${{ secrets.VERACODE_API_ID }}
-          export VERACODE_API_KEY_SECRET=${{ secrets.VERACODE_API_KEY }}
-          guid=$(http --auth-type veracode_hmac GET "https://api.veracode.com/appsec/v1/applications?name=VeraDemo-Java-GitHub" | jq -r '._embedded.applications[0].guid') 
-          echo GUID: ${guid}
-          total_flaws=$(http --auth-type veracode_hmac GET "https://api.veracode.com/appsec/v2/applications/${guid}/findings?scan_type=STATIC&violates_policy=True" | jq -r '.page.total_elements')
-          echo TOTAL_FLAWS: ${total_flaws}
-          http --auth-type veracode_hmac GET "https://api.veracode.com/appsec/v2/applications/${guid}/findings?scan_type=STATIC&violates_policy=True&size=${total_flaws}" > policy_flaws.json
-
-          TOTAL_DAST=$(http --auth-type veracode_hmac GET "https://api.veracode.com/appsec/v2/applications/${guid}/findings?scan_type=DYNAMIC&violates_policy=True" | jq -r '.page.total_elements')
-          echo TOTAL_DAST: ${total_vulns}
-          http --auth-type veracode_hmac GET "https://api.veracode.com/appsec/v2/applications/${guid}/findings?scan_type=DYNAMIC&violates_policy=True&size=${total_vulns}" > dast_vulns.json
-     
-      - name: Synch SAST flaws to GitHub Issues
-        uses: veracode/veracode-flaws-to-issues@v1
-        with:
-          scan-results-json: '/tmp/policy_flaws.json'
-          github-token: ${{ secrets.GH_TOKEN }}     
-
-      - name: Synch DAST vulnerabilities to GitHub Issues  (SCA issue synch in seperate workflow)
-        uses: veracode/veracode-flaws-to-issues@v1
-        with:
-          scan-results-json: '/tmp/dast_vulns.json'
-          github-token: ${{ secrets.GH_TOKEN }}    
-
 # Veracode CLI against the container
   Container-Inspection-SBOM:
     runs-on: ubuntu-latest
