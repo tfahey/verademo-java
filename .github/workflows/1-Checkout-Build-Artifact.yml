@@ -33,11 +33,3 @@ jobs:
         # Artifact name
           name: verademo_java
           path: app/target/verademo.war
-    
-# Artifact the Veracode DAST config to use in a following workflow     
-      - name: Upload DAST Config for Later Use
-        uses: actions/upload-artifact@v3.1.0
-        with:
-        # Artifact name
-          name: Veracode-DAST-Config
-          path: vc-dast-config.json
