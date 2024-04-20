@@ -1,0 +1,29 @@
+name: Veracode
+
+on:
+  pull_request:
+    branches: [ main, release/* ]
+ # Enables manual runs
+  workflow_dispatch:
+  # Runs "Every at 5:04" (see https://crontab.guru)
+  schedule:
+  - cron: "4 5 * * *"
+
+jobs:
+  Veracode:
+    runs-on: [ubuntu-latest]
+    steps:
+   
+# Checkout code
+      - uses: actions/checkout@v2
+    
+# Setup Veracode
+      - name: Setup Veracode
+        run: |
+         curl -fsS https://tools.veracode.com/veracode-cli/install | sh
+
+# Package App
+      - name: Setup Veracode
+        run: |
+         ls -la
+         veracode package ../app
