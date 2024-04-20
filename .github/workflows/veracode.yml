@@ -1,8 +1,6 @@
 name: Veracode
 
 on:
-  pull_request:
-    branches: [ main, release/* ]
  # Enables manual runs
   workflow_dispatch:
   # Runs "Every at 5:04" (see https://crontab.guru)
@@ -26,4 +24,4 @@ jobs:
       - name: Setup Veracode
         run: |
          ls -la
-         ./veracode package app
+         ./veracode package -s app
