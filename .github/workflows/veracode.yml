@@ -21,7 +21,13 @@ jobs:
          curl -fsS https://tools.veracode.com/veracode-cli/install | sh
 
 # Package App
-      - name: Setup Veracode
+      - name: Package App
         run: |
          ls -la
          ./veracode package -s app -a
+
+# SAST Scan
+      - name: SAST Scan
+        run: |
+         ls -la
+         ./veracode static scan /home/runner/work/verademo-java/verademo-java/verademo.war
