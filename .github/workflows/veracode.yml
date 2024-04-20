@@ -22,10 +22,15 @@ jobs:
 
 # Package App
       - name: Package App
-        run: |
-         ls -la
+        run: |         
          ./veracode package -s app -a
 
+# Configure Veracode
+      - name: Package App
+        run: |
+         ls -la
+         ./veracode configure
+         
 # SAST Scan
       - name: SAST Scan
         run: |
