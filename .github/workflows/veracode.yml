@@ -24,4 +24,4 @@ jobs:
       - name: Setup Veracode
         run: |
          ls -la
-         ./veracode package -s app
+         ./veracode package -s app -a
