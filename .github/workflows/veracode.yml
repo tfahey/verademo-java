@@ -30,4 +30,4 @@ jobs:
       - name: SAST Scan
         run: |
          ls -la
-         ./veracode static scan /home/runner/work/verademo-java/verademo-java/verademo.war
+         ./veracode static scan verademo.war
