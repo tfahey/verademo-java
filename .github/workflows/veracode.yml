@@ -27,6 +27,12 @@ jobs:
          
 # SAST Scan
       - name: SAST Scan
+        env:
+         VERACODE_API_KEY_ID: ${{ secrets.VERACODE_API_KEY_ID }}
+         VERACODE_API_KEY_SECRET: ${{ secrets.VERACODE_API_KEY_ID_SECRET }}
         run: |
          ls -la
          ./veracode static scan verademo.war
+
+
+         
