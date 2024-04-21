@@ -32,6 +32,8 @@ jobs:
          VERACODE_API_KEY_SECRET: ${{ secrets.VERACODE_API_KEY_ID_SECRET }}
         run: |
          ls -la
+         export VERACODE_API_KEY_ID=${{ secrets.VERACODE_API_KEY_ID }}
+         export VERACODE_API_KEY_SECRET=${{ secrets.VERACODE_API_KEY_ID_SECRET }}
          ./veracode static scan verademo.war
 
 
