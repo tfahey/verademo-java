@@ -23,7 +23,7 @@ jobs:
 # Package App
       - name: Package App
         run: |         
-         ./veracode package -as
+         ./veracode package -s ./ -a
          
 # SAST Scan
       - name: SAST Scan
