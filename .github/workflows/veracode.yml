@@ -11,10 +11,10 @@ jobs:
   Veracode:
     runs-on: [ubuntu-latest]
     steps:
-   
+
 # Checkout code
       - uses: actions/checkout@v2
-    
+
 # Setup Veracode
       - name: Setup Veracode
         run: |
@@ -22,14 +22,9 @@ jobs:
 
 # Package App
       - name: Package App
-        run: |         
+        run: |
          ./veracode package -s ./ -a
 
-# List contents
-      - name: List contents
-        run: |                  
-         ls -la
-         
 # SAST Scan
       - name: SAST Scan
         run: |
