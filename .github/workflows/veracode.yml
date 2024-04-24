@@ -27,5 +27,4 @@ jobs:
          VERACODE_API_KEY_ID: ${{ secrets.VERACODE_API_KEY_ID }}
          VERACODE_API_KEY_SECRET: ${{ secrets.VERACODE_API_KEY_SECRET }}
         run: |
-         ./veracode static scan ./verademo.war
-
+         ./veracode static scan ./verademo.war --summary-output sast-summary.txt
