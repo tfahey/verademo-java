@@ -11,7 +11,7 @@ jobs:
   SAST_Scan:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v*
 
       - name: Setup Veracode
         run: |
@@ -28,11 +28,17 @@ jobs:
          VERACODE_API_KEY_SECRET: ${{ secrets.VERACODE_API_KEY_SECRET }}
         run: |
          ./veracode static scan ./verademo.war --summary-output sast-summary.txt
-
+      
+      - name: Upload SAST issues artifact
+        uses: actions/upload-artifact@v*
+        with:
+           name: SCA-SAST-Issues-${{ github.run_id }}
+           path: "*.json"
+           
   SCA_Scan:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v*
 
       - name: SCA Scan
         env:
@@ -41,8 +47,8 @@ jobs:
         run: |
          curl -sSL https://download.sourceclear.com/ci.sh | sh
 
-      - name: Upload artifact with SCA app and container issues for this build
-        uses: actions/upload-artifact@v3.1.1
+      - name: Upload SCA issues artifact
+        uses: actions/upload-artifact@v*
         with:
            name: SCA-SAST-Issues-${{ github.run_id }}
            path: "*.json"
