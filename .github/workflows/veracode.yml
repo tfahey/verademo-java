@@ -30,7 +30,6 @@ jobs:
          ./veracode static scan ./verademo.war --summary-output sast-summary.txt
 
   SCA_Scan:
-    needs: SAST_Scan
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v2
