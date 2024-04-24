@@ -32,7 +32,7 @@ jobs:
       - name: Upload SAST issues artifact
         uses: actions/upload-artifact@v4.3.3
         with:
-           name: SCA-SAST-Issues-${{ github.run_id }}
+           name: SAST-App-Issues-${{ github.run_id }}
            path: "*.json"
            
   SCA_Scan:
@@ -50,5 +50,5 @@ jobs:
       - name: Upload SCA issues artifact
         uses: actions/upload-artifact@v4.3.3
         with:
-           name: SCA-SAST-Issues-${{ github.run_id }}
+           name: SCA-App-Issues-${{ github.run_id }}
            path: "*.json"
