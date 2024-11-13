@@ -44,9 +44,8 @@ stages:
           artifactName: upload
       - task: Veracode@3
         inputs:
-          ConnectionDetailsSelection: 'Credentials'
-          apiId: $(VERACODE_API_ID)
-          apiKey: $(VERACODE_API_KEY)
+          ConnectionDetailsSelection: 'Service Connection'
+          AnalysisService: 'Veracode_ID_Key'  # This is the name of the Service Connection created which stores the Veracode API ID/Key
           veracodeAppProfile: 'Verademo'
           version: 'Azure-$(build.buildNumber)'
           filepath: '$(build.artifactstagingdirectory)/upload/verademo.war'
