@@ -51,6 +51,7 @@ Note that there are some secrets that need to get set in the build files. These 
 | Jenkins       | `Jenkinsfile`                                                      |
 | GitLab        | `.gitlab-ci.yml`                                                   |
 | AWS           | `AWS-CodeStar.md` (directions for configuring AWS CodeStar builds) |
+| BitBucket     | `bitbucket-pipelines.yml`                                          |
 
 ## Technologies Used
 
