@@ -7,8 +7,11 @@ on:
  # Enables manual runs
   workflow_dispatch:
   # Runs "Every at 5:04" (see https://crontab.guru)
-  schedule:
-  - cron: "4 5 * * *"
+  #schedule:
+  # - cron: "4 5 * * *"
+
+permissions:
+  pull-requests: write
 
 jobs:
   SAST-Check-Pull-Request-or-Branch:
@@ -61,6 +64,7 @@ jobs:
         if: ${{ github.head_ref != '' }}
         uses: peter-evans/create-or-update-comment@v1
         with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.pull_request.number }}
           body: ${{ steps.get-comment-body.outputs.body }}
           reactions: rocket    
