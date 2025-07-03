@@ -79,6 +79,7 @@ jobs:
         github_token: ${{ github.token }}
         update_advisor: true
         create-issues: true
+        workspace_automation: true
         # A path within the repository where the build definition starts
         path: app
         # Run the SRCCLR with the `--allow-dirty` option
