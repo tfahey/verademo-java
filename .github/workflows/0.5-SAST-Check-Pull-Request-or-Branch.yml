@@ -60,7 +60,7 @@ jobs:
           body="${body//$'===\n---'/'===\n<details><summary>details</summary><p>\n---'}"
           body="${body//$'---\n\n==='/'---\n</p></details>\n==='}"
           body="${body//$'\n'/'<br>'}"
-          echo "{body}={body}" >> $GITHUB_OUTPUT
+          echo ::set-output name=body::$body
       - name: Add comment to PR
         if: ${{ github.head_ref != '' }}
         uses: peter-evans/create-or-update-comment@v1
