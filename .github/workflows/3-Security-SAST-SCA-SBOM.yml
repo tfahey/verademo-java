@@ -74,7 +74,7 @@ jobs:
     - name: Veracode SCA Dependency Scanning
       env:
         SRCCLR_API_TOKEN: ${{ secrets.SRCCLR_API_TOKEN }}
-      uses: veracode/veracode-sca@v2.0.65
+      uses: veracode/veracode-sca@WorkspaceAutomation
       with:
         github_token: ${{ github.token }}
         update_advisor: true
