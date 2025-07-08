@@ -77,6 +77,8 @@ jobs:
         VKEY: ${{ secrets.VKEY }}
       uses: veracode/veracode-sca@WorkspaceAutomation
       with:
+        vid: '${{ secrets.VERACODE_API_ID }}'
+        vkey: '${{ secrets.VERACODE_API_KEY }}'
         github_token: ${{ github.token }}
         update_advisor: true
         create-issues: true
