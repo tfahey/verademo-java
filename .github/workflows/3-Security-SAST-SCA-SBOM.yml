@@ -89,8 +89,8 @@ jobs:
         allow-dirty: true 
 
 # Upload security artifacts
-    - name: Upload artifact with SCA app and container issues for this build
-      uses: actions/upload-artifact@v4.6.2
-      with:
-         name: SCA-Issues-VeraDemoJava-app-container-${{ github.run_id }}
-         path: "*.json"
+#    - name: Upload artifact with SCA app and container issues for this build
+#      uses: actions/upload-artifact@v4.6.2
+#      with:
+#         name: SCA-Issues-VeraDemoJava-app-container-${{ github.run_id }}
+#         path: "*.json"
