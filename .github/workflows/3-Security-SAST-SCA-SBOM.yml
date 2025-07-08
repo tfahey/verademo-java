@@ -1,4 +1,4 @@
-name: 3-Security-SAST-SCA-SBOM
+name: Veracode Dependency Scanning
 
 # This Workflow will submit the application artifact to Veracode for SAST and SCA scan
 # It will run manually or automatically after workflow 2-Dockerize-Publish completes.
@@ -60,7 +60,7 @@ jobs:
 
 # Store security artifacts with build
       - name: Upload security artifacts
-        uses: actions/upload-artifact@v3.1.0
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: SecurityArtifacts
           path: ./tmp/*.txt     
@@ -73,20 +73,17 @@ jobs:
     - uses: actions/checkout@v3
     - name: Veracode SCA Dependency Scanning
       env:
-        SRCCLR_API_TOKEN: ${{ secrets.SRCCLR_API_TOKEN }}
-      uses: veracode/veracode-sca@v2.0.65
+        VID: ${{ secrets.VID }}
+        VKEY: ${{ secrets.VKEY }}
+      uses: veracode/veracode-sca@WorkspaceAutomation
       with:
+        vid: '${{ secrets.VERACODE_API_ID }}'
+        vkey: '${{ secrets.VERACODE_API_KEY }}'
         github_token: ${{ github.token }}
         update_advisor: true
         create-issues: true
+        workspace_automation: true
         # A path within the repository where the build definition starts
         path: app
         # Run the SRCCLR with the `--allow-dirty` option
-        allow-dirty: true 
-
-# Upload security artifacts
-    - name: Upload artifact with SCA app and container issues for this build
-      uses: actions/upload-artifact@v3.1.1
-      with:
-         name: SCA-Issues-VeraDemoJava-app-container-${{ github.run_id }}
-         path: "*.json"
+        allow-dirty: true

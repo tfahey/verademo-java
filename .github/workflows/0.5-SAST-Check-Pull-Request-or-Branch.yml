@@ -7,8 +7,12 @@ on:
  # Enables manual runs
   workflow_dispatch:
   # Runs "Every at 5:04" (see https://crontab.guru)
-  schedule:
-  - cron: "4 5 * * *"
+  #schedule:
+  # - cron: "4 5 * * *"
+
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
   SAST-Check-Pull-Request-or-Branch:
@@ -67,7 +71,7 @@ jobs:
         
 # Artifact the results for later use
       - name: Archive Results.json & Results.txt from Veracode Static Pipeline Scanner
-        uses: actions/upload-artifact@v3.1.0
+        uses: actions/upload-artifact@v4.6.2
         with:
           # Artifact name
           name: Pipeline Scanner Results
