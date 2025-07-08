@@ -1,4 +1,4 @@
-name: 3-Security-SAST-SCA-SBOM
+name: Veracode Dependency Scanning
 
 # This Workflow will submit the application artifact to Veracode for SAST and SCA scan
 # It will run manually or automatically after workflow 2-Dockerize-Publish completes.
